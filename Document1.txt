@@ -1,0 +1,15 @@
+import subprocess
+
+# Replace with your radio station's streaming URL
+stream_url = 'http://stream.example.com:8000/stream'
+
+# Start streaming using cvlc
+process = subprocess.Popen(['cvlc', stream_url])
+
+try:
+    # Keep the script running while the stream plays
+    process.wait()
+except KeyboardInterrupt:
+    # Handle Ctrl+C gracefully
+    print("Stopping the stream...")
+    process.terminate()
