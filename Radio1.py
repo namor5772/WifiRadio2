@@ -9,6 +9,7 @@ import time
 
 # Replace with your radio station's streaming URL
 stream_url = 'http://live-radio01.mediahubaustralia.com/2LRW/aac/'
+vlc_path = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
 
 # Start streaming using cvlc
 #process = subprocess.Popen(['cvlc', stream_url])
@@ -22,7 +23,7 @@ while True:
     user_input = input("Command (s/q/e): ").strip().lower()
     if user_input == 's':
         if not Running:
-            process = subprocess.Popen(["cvlc", stream_url])
+            process = subprocess.Popen([vlc_path, stream_url])
             Running = True
             print("Started streaming radio station")
         else:
