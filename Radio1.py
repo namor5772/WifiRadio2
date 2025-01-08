@@ -1,4 +1,5 @@
 import subprocess
+print(subprocess.__file__)
 import time
 
 # 2D array of radio station information in [short name, long name, url] format
@@ -23,7 +24,7 @@ while True:
     user_input = input("Command (s/q/e): ").strip().lower()
     if user_input == 's':
         if not Running:
-            process = subprocess.Popen(['cvlc', stream_url])
+            process = subprocess.Popen(["cvlc", stream_url])
             Running = True
             print("Started streaming radio station")
         else:
