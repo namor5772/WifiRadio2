@@ -6,8 +6,6 @@ import time
 
 # station = [
 
-            
-
 
 # Replace with your radio station's streaming URL
 stream_url = 'http://live-radio01.mediahubaustralia.com/2LRW/aac/'
