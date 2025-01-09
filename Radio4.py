@@ -1,9 +1,17 @@
 import subprocess
-print(subprocess.__file__)
 import time
+import RPi.GPIO as GPIO
+
+# Use BCM GPIO numbering 
+GPIO.setmode(GPIO.BCM)
+
+# Define the pin that goes to the circuit
+button_pin = 17
+
+# Set the pin as an input, and enable the pull-up resistor
+GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 # 2D array of radio station information in [short name, long name, url] format
-
 aStation = [
     ["PBW","ABC NewsRadio","https://live-radio01.mediahubaustralia.com/PBW/mp3/"],
     ["2LRW","ABC Radio Sydney","https://live-radio01.mediahubaustralia.com/2LRW/mp3/"],
@@ -24,41 +32,50 @@ print("Enter anything to scroll down one station. 'e' to stop program")
 
 Running = False
 nStation = 0
+buttonPressed = False
+
+def button_callback(channel):
+    buttonPressed = True
+    print("Button pressed")
+
+# Add event detection on the button pin
+GPIO.add_event_detect(button_pin, GPIO.FALLING, callback=button_callback, bouncetime=200)    
 
 while True:
-    user_input = input("Scroll one down through stations").strip().lower()
 
-    if user_input == 'e':
-        if Running:
-            process.kill()
-        print("Exiting...")
-        break
+    if buttonPressed:
 
-    if nStation == 7:
-        nStation = 0
-    else:
-        nStation = nStation +1
+        if nStation == 7:
+            nStation = 0
+        else:
+            nStation = nStation +1
 
-    if nStation > 0:
-        stream_url = aStation[nStation-1][2]
-        stream_longName = aStation[nStation-1][1]
+        if nStation > 0:
+            stream_url = aStation[nStation-1][2]
+            stream_longName = aStation[nStation-1][1]
 
-    if nStation == 0:
-        if Running:    
+        if nStation == 0:
+            if Running:    
+                process.terminate()
+            Running = False
+            print("No streaming")
+
+        elif nStation == 1:
+            # started new process, but no need to terminate previous one since already terminated
+            process = subprocess.Popen([vlc_path, stream_url])
+            Running = True
+            print("Started streaming radio station: " + stream_longName)
+
+        else:
+            # need to terminate current process, before starting new one
             process.terminate()
-        Running = False
-        print("No streaming")
-    elif nStation == 1:
-        # started new process, but no need to terminate previous one since already terminated
-        process = subprocess.Popen([vlc_path, stream_url])
-        Running = True
-        print("Started streaming radio station: " + stream_longName)
-    else:
-        # need to terminate current process, before starting new one
-        process.terminate()
-        process = subprocess.Popen([vlc_path, stream_url])
-        Running = True
-        print("Started streaming radio station: " + stream_longName)
+            process = subprocess.Popen([vlc_path, stream_url])
+            Running = True
+            print("Started streaming radio station: " + stream_longName)
+
+        buttonPressed = False
+
+        time.sleep(0.1)    
 
 
 
