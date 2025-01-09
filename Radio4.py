@@ -14,10 +14,14 @@ aStation = [
     ["SMOOTH953","Smooth FM Sydney 95.3","https://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953.mp3"]
 ]
 
-vlc_path = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
 
-# Start streaming using cvlc
-#process = subprocess.Popen(['cvlc', stream_url])
+# Replace with your radio station's streaming URL
+#stream_url = 'https://live-radio01.mediahubaustralia.com/2LRW/mp3/'
+#stream_url = 'https://live-radio01.mediahubaustralia.com/2FMW/mp3/'
+#stream_url = 'https://playerservices.streamtheworld.com/api/livestream-redirect/ARN_WSFM.mp3'
+#stream_url = 'https://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953.mp3'
+#vlc_path = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
+vlc_path = "cvlc"
 
 print("Radio stream interface")
 print("Enter anything to scroll down one station. 'e' to stop program")
