@@ -5,12 +5,23 @@ import RPi.GPIO as GPIO
 # Use BCM GPIO numbering 
 GPIO.setmode(GPIO.BCM)
 
-# Define the pin that goes to the circuit
-button_pin = 26
+# Define pins that goes to the circuit
+button_pin = 17
+led0_pin = 26
+led1_pin = 19
+led2_pin = 13
 
-
-# Set the pin as an input, and enable the pull-up resistor
+# Setup the pins
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setwarnings(False)
+GPIO.setup(led0_pin, GPIO.OUT)
+GPIO.setup(led1_pin, GPIO.OUT)
+GPIO.setup(led2_pin, GPIO.OUT)
+
+# setpup the leds
+GPIO.output(led0_pin,GPIO.LOW)
+GPIO.output(led1_pin,GPIO.LOW)
+GPIO.output(led2_pin,GPIO.LOW)
 
 # 2D array of radio station information in [short name, long name, url] format
 aStation = [
@@ -23,37 +34,32 @@ aStation = [
     ["SMOOTH953","Smooth FM Sydney 95.3","https://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953.mp3"]
 ]
 
-
-# Replace with your radio station's streaming URL
-#stream_url = 'https://live-radio01.mediahubaustralia.com/2LRW/mp3/'
-#stream_url = 'https://live-radio01.mediahubaustralia.com/2FMW/mp3/'
-#stream_url = 'https://playerservices.streamtheworld.com/api/livestream-redirect/ARN_WSFM.mp3'
-#stream_url = 'https://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953.mp3'
-#vlc_path = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
-vlc_path = "cvlc"
+vlc_path = "/usr/bin/cvlc"
 
 print("Radio stream interface")
-print("Enter anything to scroll down one station. 'e' to stop program")
 
 Running = False
 nStation = 0
-buttonPressed = False
-
-def button_callback(channel):
-    buttonPressed = True
-    print("Button pressed")
-
-# Add event detection on the button pin
-GPIO.add_event_detect(button_pin, GPIO.RISING, callback=button_callback, bouncetime=200)    
 
 while True:
 
-    if buttonPressed:
-
+    if GPIO.input(button_pin) == GPIO.LOW:
+        time.sleep(0.2)    
+        
         if nStation == 7:
             nStation = 0
         else:
             nStation = nStation +1
+        print("Button pressed, Station: ",nStation)    
+
+        # display the station number in binary
+        bit0 = (nStation >> 0) & 1 # LSB
+        bit1 = (nStation >> 1) & 1 # middle bit
+        bit2 = (nStation >> 2) & 1 # MSB
+        GPIO.output(led0_pin,bit0)
+        GPIO.output(led1_pin,bit1)
+        GPIO.output(led2_pin,bit2)
+        
 
         if nStation > 0:
             stream_url = aStation[nStation-1][2]
@@ -77,10 +83,6 @@ while True:
             process = subprocess.Popen([vlc_path, stream_url])
             Running = True
             print("Started streaming radio station: " + stream_longName)
-
-        buttonPressed = False
-
-        time.sleep(0.1)    
 
 
 
