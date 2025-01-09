@@ -4,11 +4,22 @@ import time
 
 # 2D array of radio station information in [short name, long name, url] format
 
-# station = [
+aStation = [
+    ["PBW","ABC NewsRadio","https://live-radio01.mediahubaustralia.com/PBW/acc/"],
+    ["2LRW","ABC Radio Sydney","https://live-radio01.mediahubaustralia.com/2LRW/acc/"],
+    ["5LRW","ABC Radio Adelaide","https://live-radio01.mediahubaustralia.com/5LRW/acc/"],
+    ["FM2W","ABC Classic 2","https://live-radio01.mediahubaustralia.com/FM2W/acc/"],
+    ["2FMW","ABC Classic Sydney","https://live-radio01.mediahubaustralia.com/2FMW/acc/"],
+    ["WSFM","GOLD 101.7","https://playerservices.streamtheworld.com/api/livestream-redirect/ARN_WSFM.mp3"],
+    ["SMOOTH953","Smooth FM Sydney 95.3","https://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953.mp3"]
+]
 
 
 # Replace with your radio station's streaming URL
-stream_url = 'http://live-radio01.mediahubaustralia.com/2LRW/aac/'
+stream_url = 'https://live-radio01.mediahubaustralia.com/2LRW/mp3/'
+#stream_url = 'https://live-radio01.mediahubaustralia.com/2FMW/mp3/'
+#stream_url = 'https://playerservices.streamtheworld.com/api/livestream-redirect/ARN_WSFM.mp3'
+stream_url = 'https://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953.mp3'
 vlc_path = "C:\\Program Files\\VideoLAN\\VLC\\vlc.exe"
 
 # Start streaming using cvlc
@@ -18,27 +29,44 @@ print("Radio stream interface")
 print("Enter 's' to start streaming, 'q' to quit streaming. 'e' to stop program")
 
 Running = False
+nStation = 0
+
+
 
 while True:
-    user_input = input("Command (s/q/e): ").strip().lower()
-    if user_input == 's':
-        if not Running:
-            process = subprocess.Popen([vlc_path, stream_url])
-            Running = True
-            print("Started streaming radio station")
-        else:
-            print("Cannot restart streaming if it as already streaming")
-    elif user_input == 'q':
-        if Running:
-            process.terminate()
-            Running = False
-            print("stopped streaming radio station")
-        else:
-            print("nothing to stop")
-    elif user_input == 'e':
+    user_input = input("Scroll one down through stations").strip().lower()
+
+    if user_input == 'e':
         if Running:
             process.kill()
-            print("Exiting...")
+        print("Exiting...")
         break
+
+    if nStation == 7:
+        nStation = 0
     else:
-        print("Invalid command. Please enter 's', 'q', or 'e'.")
+        nStation = nStation +1
+
+    if nStation > 0:
+        stream_url = aStation[nStation-1][2]
+        stream_longName = aStation[nStation-1][1]
+
+    if nStation == 0:
+        if Running:    
+            process.terminate()
+        Running = False
+        print("No streaming")
+    if nStation == 1:
+        # started new process, but no need to terminate previous one since already terminated
+        process = subprocess.Popen([vlc_path, stream_url])
+        Running = True
+        print("Started streaming radio station " + stream_longName)
+    else:
+        # need to terminate current process, before starting new one
+        process.terminate()
+        process = subprocess.Popen([vlc_path, stream_url])
+        Running = True
+        print("Started streaming radio station " + stream_longName)
+
+
+
