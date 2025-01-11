@@ -40,10 +40,31 @@ print("Radio stream interface")
 
 Running = False
 nStation = 0
+startup = True
+toggle = 0
 
 while True:
 
-    if GPIO.input(button_pin) == GPIO.LOW:
+    if ((GPIO.input(button_pin) == GPIO.LOW) and (startup)):
+        GPIO.output(led0_pin,0)
+        GPIO.output(led1_pin,0)
+        GPIO.output(led2_pin,0)
+        print("TEST 2")
+        startup = False
+
+    if (startup):
+        GPIO.output(led0_pin,toggle)
+        GPIO.output(led1_pin,toggle)
+        GPIO.output(led2_pin,toggle)
+        if toggle==0:
+            toggle=1
+        else:
+            toggle=0
+        time.sleep(1.0)
+        print("TEST 1")
+        
+    if ((GPIO.input(button_pin) == GPIO.LOW) and (not startup)):
+        
         time.sleep(0.2)    
         
         if nStation == 7:
@@ -83,6 +104,5 @@ while True:
             process = subprocess.Popen([vlc_path, stream_url])
             Running = True
             print("Started streaming radio station: " + stream_longName)
-
 
 
