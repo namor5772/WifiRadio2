@@ -6,10 +6,10 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
 # Define pins that goes to the circuit
-button_pin = 17
-led0_pin = 26
-led1_pin = 19
-led2_pin = 13
+button_pin = 26
+led0_pin = 19
+led1_pin = 13
+led2_pin = 6
 
 # Setup the pins
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
