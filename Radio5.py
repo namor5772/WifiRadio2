@@ -9,6 +9,8 @@ script_directory = os.path.dirname(os.path.abspath(__file__))
 # Create the full filepath to the saved radio station file
 filename = 'savedRadioStation.txt'
 filepath = os.path.join(script_directory, filename)
+print(f'The file {filepath} stores the last streamed station number.')
+
 
 # Use BCM GPIO numbering 
 GPIO.setmode(GPIO.BCM)
@@ -26,7 +28,7 @@ GPIO.setup(led0_pin, GPIO.OUT)
 GPIO.setup(led1_pin, GPIO.OUT)
 GPIO.setup(led2_pin, GPIO.OUT)
 
-# setpup the leds
+# setup the leds to be initially all off
 GPIO.output(led0_pin,GPIO.LOW)
 GPIO.output(led1_pin,GPIO.LOW)
 GPIO.output(led2_pin,GPIO.LOW)
@@ -58,19 +60,17 @@ while True:
         if (startup):
             # load saved station number from file when radio powered up
             try:
-                with open(filename, 'r') as file:
+                with open(filepath, 'r') as file:
                     nStation = int(file.read())
             except FileNotFoundError:
-                print(f'Error: The file {filename} does not exist.')
+                print(f'Error: The file {filepath} does not exist.')
                 nStation = 0
-            startup = False
         else:
             # increment station number modulo 8 when button pressed
             if nStation == 7:
                 nStation = 0
             else:
                 nStation = nStation +1
-            print("Button pressed, Station: ",nStation)    
 
             # save station number to file (if radio powered off when playing this station)
             with open(filepath, 'w') as file:
@@ -83,6 +83,7 @@ while True:
         GPIO.output(led0_pin,bit0)
         GPIO.output(led1_pin,bit1)
         GPIO.output(led2_pin,bit2)
+        print("Button pressed, Station: ",nStation)    
 
         if nStation > 0:
             stream_url = aStation[nStation-1][2]
@@ -101,10 +102,13 @@ while True:
             print("Started streaming radio station: " + stream_longName)
 
         else:
-            # need to terminate current process, before starting new one
-            process.terminate()
+            if (not startup):
+                # need to terminate current process, before starting new one
+                process.terminate()
+                
             process = subprocess.Popen([vlc_path, stream_url])
             Running = True
             print("Started streaming radio station: " + stream_longName)
 
+        startup = False    
 
