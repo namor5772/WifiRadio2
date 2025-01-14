@@ -1,11 +1,19 @@
 import subprocess
 import time
 import RPi.GPIO as GPIO
+import os;    
+
+# Get the directory where the script is located
+script_directory = os.path.dirname(os.path.abspath(__file__))
+
+# Create the full filepath to the saved radio station file
+filename = 'savedRadioStation.txt'
+filepath = os.path.join(script_directory, filename)
 
 # Use BCM GPIO numbering 
 GPIO.setmode(GPIO.BCM)
 
-# Define pins that goes to the circuit
+# Define Raspberry Pi pins that go to the interface circuit board
 button_pin = 26
 led0_pin = 19
 led1_pin = 13
@@ -34,44 +42,39 @@ aStation = [
     ["SMOOTH953","Smooth FM Sydney 95.3","https://playerservices.streamtheworld.com/api/livestream-redirect/SMOOTH953.mp3"]
 ]
 
-vlc_path = "/usr/bin/cvlc"
+# some utility global variables
+vlc_path = "/usr/bin/cvlc" # full path to cvlc
+Running = False # flag True if radio station is streaming
+nStation = 0 # station number (0 is the "no radio streaming" station)
+startup = True # True when radio initially powered up 
 
 print("Radio stream interface")
 
-Running = False
-nStation = 0
-startup = True
-toggle = 0
-
 while True:
 
-    if ((GPIO.input(button_pin) == GPIO.LOW) and (startup)):
-        GPIO.output(led0_pin,0)
-        GPIO.output(led1_pin,0)
-        GPIO.output(led2_pin,0)
-        print("TEST 2")
-        startup = False
+    if ((GPIO.input(button_pin) == GPIO.LOW) or (startup)):
+        time.sleep(0.2) # pathetic debouncing code
 
-    if (startup):
-        GPIO.output(led0_pin,toggle)
-        GPIO.output(led1_pin,toggle)
-        GPIO.output(led2_pin,toggle)
-        if toggle==0:
-            toggle=1
+        if (startup):
+            # load saved station number from file when radio powered up
+            try:
+                with open(filename, 'r') as file:
+                    nStation = int(file.read())
+            except FileNotFoundError:
+                print(f'Error: The file {filename} does not exist.')
+                nStation = 0
+            startup = False
         else:
-            toggle=0
-        time.sleep(1.0)
-        print("TEST 1")
-        
-    if ((GPIO.input(button_pin) == GPIO.LOW) and (not startup)):
-        
-        time.sleep(0.2)    
-        
-        if nStation == 7:
-            nStation = 0
-        else:
-            nStation = nStation +1
-        print("Button pressed, Station: ",nStation)    
+            # increment station number modulo 8 when button pressed
+            if nStation == 7:
+                nStation = 0
+            else:
+                nStation = nStation +1
+            print("Button pressed, Station: ",nStation)    
+
+            # save station number to file (if radio powered off when playing this station)
+            with open(filepath, 'w') as file:
+                file.write(str(nStation))
 
         # display the station number in binary
         bit0 = (nStation >> 0) & 1 # LSB
@@ -80,7 +83,6 @@ while True:
         GPIO.output(led0_pin,bit0)
         GPIO.output(led1_pin,bit1)
         GPIO.output(led2_pin,bit2)
-        
 
         if nStation > 0:
             stream_url = aStation[nStation-1][2]
