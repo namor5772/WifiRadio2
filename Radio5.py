@@ -11,7 +11,6 @@ filename = 'savedRadioStation.txt'
 filepath = os.path.join(script_directory, filename)
 print(f'The file {filepath} stores the last streamed station number.')
 
-
 # Use BCM GPIO numbering 
 GPIO.setmode(GPIO.BCM)
 
