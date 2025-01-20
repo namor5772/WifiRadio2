@@ -26,7 +26,18 @@ The interface circuit is placed in a custom 3D printed enclosure which is secure
 ![alt text](image.png)
 ![alt text](image-1.png)
 ![alt text](image-2.png)
-The case was designed using Blender...
+![alt text](image-3.png)
+The case was designed using Blender.
+
+The top of the case is in [WifiRadio2_BoxTop.blend](WifiRadio2_BoxTop.blend), while the bottom is in [WifiRadio2_BoxBottom.blend](WifiRadio2_BoxBottom.blend). To view or edit these files open them with the Blender 4.3 App in Windows 11.
+
+To be able to 3D print the enclosure these files must be exported from the Blender App as [WifiRadio2_BoxTop.stl](WifiRadio2_BoxTop.stl) and [WifiRadio2_BoxBottom.stl](WifiRadio2_BoxBottom.stl) respectively.
+
+Finally these *.stl files must be opened into the Crealty Print 6.0 Windows 11 App which creates the [WifiRadio2_BoxTop.3mf](WifiRadio2_BoxTop.3mf) and [WifiRadio2_BoxBottom.3mf](WifiRadio2_BoxBottom.3mfl) respectively. These contain the type of printer needed and other details of the print and are the basis for creating (by File => Export => Export Gcode...) the *.gcode files [WifiRadio2_BoxTop.gcode](WifiRadio2_BoxTop.gcode) and [WifiRadio2_BoxBottom.gcode](WifiRadio2_BoxBottom.gcode) respectively. These are the actual files used by the 3D Printer to do the actual printing! The files saved here are for the Crealty Ender-3 V3 SE printer with default setting for Hyper PLA.
+
+If you have a different 3D printer you can still use the *.stl files but you will have to generate the *.gcode files yourself.
+
+
 
 ## Software
 
