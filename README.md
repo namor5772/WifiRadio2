@@ -41,6 +41,7 @@ If you have a different 3D printer you can still use the *.stl files but you wil
 
 I have used a Raspberry Pi Model B Rev1.2 with 4Gb RAM, running Raspbian GNU/Linux 12 (bookworm) on a 32Gb SD card.
 It is configured to Boot To Desktop with Auto login, with only the Remote GPIO enabled.
+
 Install Python3 and idle3 as well as vlc, all of which reside in the directory /usr/bin/.
 In the directory /home/{username}/.config/autostart/ create a file autovlc.desktop with the contents:
 
@@ -50,7 +51,9 @@ Type=Application
 Exec=/usr/bin/idle -r /home/roman/GitHub/WifiRadio2/Radio5.py
 ```
 
-where we have created a directory /home/{username}/GitHub/WifiRadio2/ into which we have placed the python script Radio5.py detailed below
+This way of running the script via autostart in the GUI is because I tried to run it after boot in the Command Line Interface (CLI), however I could not make this work due to some privilage issues which made vlc unable to execute. This would have been more efficient and elegant but I just wanted to make it work.
+
+In the directory /home/{username}/GitHub/WifiRadio2/ which you need to create place the python script Radio5.py detailed below. You will also need to make the Wifi network automatically connect to an available access point, by discovering it and putting its password. if you move the location of this internet radio you will need to setup anothwer wifi connection by accesing the Raspbewrry Pi's GUI with an attached mouse, keyboard and screen. 
 
 ## Software
 
