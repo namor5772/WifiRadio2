@@ -37,7 +37,20 @@ Finally these *.stl files must be opened into the Crealty Print 6.0 Windows 11 A
 
 If you have a different 3D printer you can still use the *.stl files but you will have to generate the *.gcode files yourself.
 
+## Raspberry Pi setup
 
+I have used a Raspberry Pi Model B Rev1.2 with 4Gb RAM, running Raspbian GNU/Linux 12 (bookworm) on a 32Gb SD card.
+It is configured to Boot To Desktop with Auto login, with only the Remote GPIO enabled.
+Install Python3 and idle3 as well as vlc, all of which reside in the directory /usr/bin/.
+In the directory /home/{username}/.config/autostart/ create a file autovlc.desktop with the contents:
+
+```terminal
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/idle -r /home/roman/GitHub/WifiRadio2/Radio5.py
+```
+
+where we have created a directory /home/{username}/GitHub/WifiRadio2/ into which we have placed the python script Radio5.py detailed below
 
 ## Software
 
