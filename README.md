@@ -39,7 +39,7 @@ If you have a different 3D printer you can still use the *.stl files but you wil
 
 ## Raspberry Pi setup
 
-I have used a Raspberry Pi Model B Rev1.2 with 4Gb RAM, running Raspbian GNU/Linux 12 (bookworm) on a 32Gb SD card.
+I have used a Raspberry Pi Model B Rev1.2 with 4Gb RAM, running Raspbian GNU/Linux 12 (bookworm) on a 32Gb SD card (which you will have to image).
 It is configured to Boot To Desktop with Auto login, with only the Remote GPIO enabled.
 
 Install Python3 and idle3 as well as vlc, all of which reside in the directory /usr/bin/.
@@ -53,13 +53,14 @@ Exec=/usr/bin/idle -r /home/roman/GitHub/WifiRadio2/Radio5.py
 
 This way of running the script via autostart in the GUI is because I tried to run it after boot in the Command Line Interface (CLI), however I could not make this work due to some privilage issues which made vlc unable to execute. This would have been more efficient and elegant but I just wanted to make it work.
 
-In the directory /home/{username}/GitHub/WifiRadio2/ which you need to create place the python script Radio5.py detailed below. You will also need to make the Wifi network automatically connect to an available access point, by discovering it and inputting its password. if you move the location of this internet radio you will need to setup another wifi connection by accessing the Raspbewrry Pi's GUI with an attached mouse, keyboard and screen! 
+In the directory /home/{username}/GitHub/WifiRadio2/ which you need to create place the python script Radio5.py (detailed below). You will also need to make the Wifi network automatically connect to an available access point by discovering it and inputting its password. if you move the location of this internet radio you will need to setup another wifi connection by accessing the Raspbewrry Pi's GUI with an attached mouse, keyboard and screen! 
 
 ## Software
 
 The radio is implemented in software by a python script [Radio5.py](Radio5.py) that auto starts through the Python IDLE shell when the the GUI becomes active. The audio streaming uses cvlc. A valid wifi connection is assumed to be available and automatically enabled when the Raspberry Pi is powered on.
 
 ```python
+# all part of the Python standard libraries, with RPI.GPIO pre installed as part of the Raspian os
 import subprocess
 import time
 import RPi.GPIO as GPIO
@@ -76,7 +77,8 @@ print(f'The file {filepath} stores the last streamed station number.')
 # Use BCM GPIO numbering 
 GPIO.setmode(GPIO.BCM)
 
-# Define Raspberry Pi pins that go to the interface circuit board
+# Define the 4 Raspberry Pi pins that go to the interface circuit board
+# Ground is not included
 button_pin = 26
 led0_pin = 19
 led1_pin = 13
@@ -95,6 +97,7 @@ GPIO.output(led1_pin,GPIO.LOW)
 GPIO.output(led2_pin,GPIO.LOW)
 
 # 2D array of radio station information in [short name, long name, url] format
+# clearly this can be varied if you wish to listen to different 7 stations
 aStation = [
     ["2LRW","ABC Radio Sydney","https://live-radio01.mediahubaustralia.com/2LRW/mp3/"],
     ["5LRW","ABC Radio National","https://live-radio01.mediahubaustralia.com/2RNW/mp3/"],
@@ -106,7 +109,7 @@ aStation = [
 ]
 
 # some utility global variables
-vlc_path = "/usr/bin/cvlc" # full path to cvlc
+vlc_path = "/usr/bin/cvlc" # full path to cvlc, it is installed together with vlc
 Running = False # flag True if radio station is streaming
 nStation = 0 # station number (0 is the "no radio streaming" station)
 startup = True # True when radio initially powered up 
@@ -176,44 +179,23 @@ while True:
 ```
 ## List of parts
 
-Pricing and availability as of 26-Jan-2025
+Pricing and availability as of 26-Jan-2025. Total cost is $250.57, but clearly some of the items will be usable in many other projects or you will already have them. The pro rata cost is __$209.11__
+
+You will also need a soldering iron and solder, some two sided tape for attaching the circuit enclosure on top of the Raspberry Pi case as well as a printer to print the station legend for taping/sticking to the top of the enclosure. 
 
 | Qty | Product | Description | AUD Cost | Comment | Designator |
 | --- | --- | --- | --- | --- | --- |
 | 1 | [RPI4-MODBP-4GB](https://au.element14.com/raspberry-pi/rpi4-modbp-4gb/raspberry-pi-4-model-b-4gb/dp/3051887?CMP=KNC-MAU-GEN-SHOPPING) | SBC, [Raspberry Pi4 B 4GB](RPI4B.png), BCM2711, ARM Cortex-A72, 4GB RAM, MicroSD, Linux, Wifi, 2x micro HDMI | $92.65 | The brains of this project with this [datasheet](4170044.pdf)  | connected via J1 |
+| 1 | [XC4992](https://jaycar.com.au/p/XC4992) | 32GB Class 10 microSDHC [Card](Card.png) | $12.95 | For Raspberry Pi OS and storage | |
 | 1 | [PH-102475](https://raspberry.piaustralia.com.au/products/highpi-raspberry-pi-4-model-b-case) | HighPi Raspberry Pi 4 Model B [Case](Case.png) | $32.12 | could use other cases | |
-| 1 | [HP9544](https://jaycar.com.au/p/HP9544) | PC Boards Vero Type [Strip](Strip.png) - 95mm x 305mm | $15.50 | Contains the circuit | |
+| 1 | [HP9544](https://jaycar.com.au/p/HP9544) | PC Boards Vero Type [Strip](Strip.png) - 95mm x 305mm | $15.50 | Contains the circuit | $4.00 cost used|
 | 3 | [ZD0150](https://jaycar.com.au/p/ZD0150) | Red 5mm [LED](LED.png) 8mcd Round Diffused | $1.20 | indicate status in binary | D0, D1, D2 |
 | 1 | [SP0720](https://jaycar.com.au/p/SP0720) | Red Snap Action Keyboard [Switch](Switch.png) - PCB Mount | $1.45 | The only input item | SW1 |
+| 1 | [RR0556](https://jaycar.com.au/p/RR0556) | 220 Ohm 0.5 Watt Metal Film [Resistors](Resistor.png) - Pack of 8 (only need 3) | $0.85 | Current limiting for LEDs | R0, R1, R2 - $0.32 cost used|
 | 1 | [HM3422](https://jaycar.com.au/p/HM3422) | 2 Pin 0.1in 90 Degree Locking [Header](Header2.png) - 2.54mm Pitch - Single | $0.30 | connector to RPi | part of J1 |
 | 1 | [HM3423](https://jaycar.com.au/p/HM3423) | 3 Pin 0.1in 90 Degree Locking [Header](Header3.png) - 2.54mm Pitch - Single | $0.40 | connector to RPi | part of J1 |
-| 1 | [WC6026](https://jaycar.com.au/p/WC6026) | 150mm Socket to Socket Jumper [Leads](Leads.png) - 40 Piece | $11.75 | 5 wires to connect Vero Board to Raspberry Pi | connects to J1 |
-|1 | [WW4030](https://jaycar.com.au/p/WW4030) | Tinned Copper [Wire](Wire.png) - 100 gram Roll | $19.95 | for wiring up Vero board |
-|1 | [RR0556](https://jaycar.com.au/p/RR0556) | 220 Ohm 0.5 Watt Metal Film [Resistors](Resistor.png) - Pack of 8 (only need 3) | $0.85 | Current limiting for LEDs | R0, R1, R2 |
-|1 | [XC5191](https://jaycar.com.au/p/XC5191) | USB Powered PC Speakers | $19.75 | Current limiting for LEDs | |
-
-
-
-| 1 | [BARO (52)](https://www.freetronics.com.au/products/barometric-pressure-sensor-module) | I2C 5V Barometric Pressure Sensor Module | $19.00 | based on the [MS5673 chip](Extra/ENG_DS_MS5637-02BA03_B5.pdf) | U2 |
-| 1 | [ADA5580](https://core-electronics.com.au/adafruit-max17048-lipoly-liion-fuel-gauge-and-battery-monitor-stemma-jst-ph-qt-qwiic.html) | Adafruit I2C 5V MAX17048 LiPoly / LiIon Fuel Gauge and Battery Monitor - STEMMA JST PH & QT / Qwiic | $11.75 | based on the [MAX17048 chip](Extra/MAX17048-MAX17049.pdf) | U5 |
-| 1 | [ADA1904](https://core-electronics.com.au/adafruit-micro-lipo-w-microusb-jack-usb-liion-lipoly-charger-v1.html) | Adafruit Micro Lipo w/MicroUSB Jack - USB LiIon/LiPoly charger - v1 | $13.45 | based on the [MCP73831 chip](Extra/MCP73831.pdf) | U4 |
-| 1 | [POLOLU-2564](https://core-electronics.com.au/pololu-5v-step-up-voltage-regulator-u1v10f5.html) | Pololu 5V Step-Up Voltage Regulator U1V10F5 | $9.50 | based on this [chip](Extra/tps61200_193680627bc.pdf) | U3 |
-| 1 | [S4724](https://www.altronics.com.au/p/s4724-3.7v-1100mah-polymer-lithium-ion-battery-lipo/) | 3.7V 1100mAh Polymer Lithium Ion Battery (LiPo) | $21.95 | The LiPo battery that powers this project | Connects to U4 using JST-PH connector |
-| 1 | [HB6004](https://jaycar.com.au/p/HB6004) | Jiffy Case Imac Blue UB5 | $3.75 | Enclosure for project, 83mm x 54mm x 31mm |  |
-| 1 | [SS0812](https://jaycar.com.au/p/SS0812) | Sub-miniature DPDT Panel Mount Switch | $1.75 | on/off switch to power this altimeter | SW1 |
-
-| 1 | [XC4464](https://jaycar.com.au/p/XC4464) | Duinotech Arduino Compatible USB to Serial Adaptor (uses FT232 chip) | $28.95 | used to program the Arduino Pro Mini (XC1) ||
-
-
-| Qty | Product | Description | AUD Cost | Comment | Designator____ |
-| --- | --- | --- | --- | --- | --- |
-|1 | [CE05971](https://core-electronics.com.au/raspberry-pi-3-model-a-plus.html) | Raspberry Pi 3 Model A+ | $44.51 | Used for internet connection/control and storing collected data | connected to J2 and J8. Also camera attached |
-|1 | [A000052](https://core-electronics.com.au/arduino-leonardo-without-headers.html) | Arduino Leonardo (Without Headers) | $39.00 | Used to interface all sensors | connected to J3, J5, J6 and J9 |
-|1 | [XC4514](https://jaycar.com.au/p/XC4514) | Arduino Compatible DC Voltage Regulator | $7.95 | Converts 12V battery power to 5.2V for all weather station needs. Use 4 pins from 40 Pin Header Terminal Strip to attach its corners to Vero board | U1 |
-|1 | [XC4486](https://jaycar.com.au/p/XC4486) | Arduino Compatible Logic Level Converter Module | $4.95 | enables bidirecional serial comms between Raspberry Pi and Arduino boards | B1 |
-|1 | [ADA4226](https://core-electronics.com.au/adafruit-ina260-high-or-low-side-voltage-current-power-sensor.html) | Adafruit INA260 High or Low Side Voltage, Current, Power Sensor | $22.51 | measures power and voltage used by total circuit. Attach to Vero board using supplied 8 Pin Header Terminal Strip | B2 |
-
-   
-
-ENJOY!
-
+| 1 | [WW4030](https://jaycar.com.au/p/WW4030) | Tinned Copper [Wire](Wire.png) - 100 gram Roll | $19.95 | for wiring up above Vero board | $0.80 cost used|
+| 1 | [WC6026](https://jaycar.com.au/p/WC6026) | 150mm Socket to Socket Jumper [Leads](Leads.png) - 40 Piece | $11.75 | 5 wires to connect Vero Board to Raspberry Pi | connects to J1 - $1.47 cost used|
+| 1 | [XC5191](https://jaycar.com.au/p/XC5191) | USB Powered PC [Speakers](Speakers.png) | $19.75 | Any if USB powered & 3.5mm input | |
+| 1 | [MP3449](https://jaycar.com.au/p/MP3449) | Mains USB Mini Power [Adaptor](Adaptor.png) - 2.4A | $26.95 | to Power Raspberry Pi | |
+| 1 | [WC7900](https://jaycar.com.au/p/WC7900) | USB Type-C to USB 2.0 A Male [Cable](Cable.png) 1.8m | $14.75 | to Power Raspberry Pi | |
