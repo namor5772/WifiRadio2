@@ -180,11 +180,18 @@ Pricing and availability as of 26-Jan-2025
 
 | Qty | Product | Description | AUD Cost | Comment | Designator |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [RPI4-MODBP-4GB](https://au.element14.com/raspberry-pi/rpi4-modbp-4gb/raspberry-pi-4-model-b-4gb/dp/3051887?CMP=KNC-MAU-GEN-SHOPPING) | SBC, [Raspberry](RPI4B.png) Pi4 B 4GB, BCM2711, ARM Cortex-A72, 4GB RAM, MicroSD, Linux, Wifi, 2x micro HDMI | $92.65 | The brains of this project with this [datasheet](4170044.pdf)  | connected via J1 |
+| 1 | [RPI4-MODBP-4GB](https://au.element14.com/raspberry-pi/rpi4-modbp-4gb/raspberry-pi-4-model-b-4gb/dp/3051887?CMP=KNC-MAU-GEN-SHOPPING) | SBC, [Raspberry Pi4 B 4GB](RPI4B.png), BCM2711, ARM Cortex-A72, 4GB RAM, MicroSD, Linux, Wifi, 2x micro HDMI | $92.65 | The brains of this project with this [datasheet](4170044.pdf)  | connected via J1 |
 | 1 | [PH-102475](https://raspberry.piaustralia.com.au/products/highpi-raspberry-pi-4-model-b-case) | HighPi Raspberry Pi 4 Model B [Case](Case.png) | $32.12 | could use other cases | |
 | 1 | [HP9544](https://jaycar.com.au/p/HP9544) | PC Boards Vero Type [Strip](Strip.png) - 95mm x 305mm | $15.50 | Contains the circuit | |
 | 3 | [ZD0150](https://jaycar.com.au/p/ZD0150) | Red 5mm [LED](LED.png) 8mcd Round Diffused | $1.20 | indicate status in binary | D0, D1, D2 |
 | 1 | [SP0720](https://jaycar.com.au/p/SP0720) | Red Snap Action Keyboard [Switch](Switch.png) - PCB Mount | $1.45 | The only input item | SW1 |
+| 1 | [HM3422](https://jaycar.com.au/p/HM3422) | 2 Pin 0.1in 90 Degree Locking [Header](Header2.png) - 2.54mm Pitch - Single | $0.30 | connector to RPi | part of J1 |
+| 1 | [HM3423](https://jaycar.com.au/p/HM3423) | 3 Pin 0.1in 90 Degree Locking [Header](Header3.png) - 2.54mm Pitch - Single | $0.40 | connector to RPi | part of J1 |
+| 1 | [WC6026](https://jaycar.com.au/p/WC6026) | 150mm Socket to Socket Jumper [Leads](Leads.png) - 40 Piece | $11.75 | 5 wires to connect Vero Board to Raspberry Pi | connects to J1 |
+|1 | [WW4030](https://jaycar.com.au/p/WW4030) | Tinned Copper [Wire](Wire.png) - 100 gram Roll | $19.95 | for wiring up Vero board |
+|1 | [RR0556](https://jaycar.com.au/p/RR0556) | 220 Ohm 0.5 Watt Metal Film [Resistors](Resistor.png) - Pack of 8 (only need 3) | $0.85 | Current limiting for LEDs | R0, R1, R2 |
+|1 | [XC5191](https://jaycar.com.au/p/XC5191) | USB Powered PC Speakers | $19.75 | Current limiting for LEDs | |
+
 
 
 | 1 | [BARO (52)](https://www.freetronics.com.au/products/barometric-pressure-sensor-module) | I2C 5V Barometric Pressure Sensor Module | $19.00 | based on the [MS5673 chip](Extra/ENG_DS_MS5637-02BA03_B5.pdf) | U2 |
