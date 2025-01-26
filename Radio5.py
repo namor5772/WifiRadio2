@@ -1,3 +1,4 @@
+# all part of the Python standard libraries, with RPI.GPIO pre installed as part of the Raspian os
 import subprocess
 import time
 import RPi.GPIO as GPIO
@@ -33,6 +34,7 @@ GPIO.output(led1_pin,GPIO.LOW)
 GPIO.output(led2_pin,GPIO.LOW)
 
 # 2D array of radio station information in [short name, long name, url] format
+# clearly this can be varied if you wish to listen to different 7 stations
 aStation = [
     ["2LRW","ABC Radio Sydney","https://live-radio01.mediahubaustralia.com/2LRW/mp3/"],
     ["5LRW","ABC Radio National","https://live-radio01.mediahubaustralia.com/2RNW/mp3/"],

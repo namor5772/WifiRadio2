@@ -6,34 +6,34 @@ There are 7 available radio stations. One scrolls through them by successively p
 
 ## Physical design
 
-The TinyCad design file [WifiRadio2.dsn](WifiRadio2.dsn) for the interface circuitry is displayed below:
-![WifiRadio2.net](WifiRadio2_dsn.png)
+The TinyCad design file [WifiRadio2.dsn](Hardware/WifiRadio2.dsn) for the interface circuitry is displayed below:
+![WifiRadio2.net](Images/WifiRadio2_dsn.png)
 
-The resulting VeeCad file [WifiRadio2.per](WifiRadio2.per) is displayed below:
+The resulting VeeCad file [WifiRadio2.per](Hardware/WifiRadio2.per) is displayed below:
 
-It is obtained from the Netlist file [WifiRadio2.net](WifiRadio2.net) generated from WifiRadio2.dsn (displayed above).
-![WifiRadio2.per](WifiRadio2_per.png)
+It is obtained from the Netlist file [WifiRadio2.net](Hardware/WifiRadio2.net) generated from WifiRadio2.dsn (displayed above).
+![WifiRadio2.per](Images/WifiRadio2_per.png)
 
 This is what the completed interface board looks like:
-![interfaceboard image1](interfaceboard_image1.png)
+![interfaceboard image1](Images/interfaceboard_image1.png)
 Note that the LEDs are offset from the circuit board by 5mm using an appropriate piece of balsawood.
-![interfaceboard image2](interfaceboard_image2.png)
+![interfaceboard image2](Images/interfaceboard_image2.png)
 
 ## Enclosure
 
 The interface circuit is placed in a custom 3D printed enclosure which is secured on top of the case that houses the Raspberry Pi. 5 wires connect the interface circuit to the Raspberry Pi. This is the internet radio to which stereo USB powered 3.5m audio speakers must be attached (to the underlying Raspberry Pi).
 
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-![alt text](image-3.png)
+![alt text](Images/image.png)
+![alt text](Images/image-1.png)
+![alt text](Images/image-2.png)
+![alt text](Images/image-3.png)
 The case was designed using Blender.
 
-The top of the case is in [WifiRadio2_BoxTop.blend](WifiRadio2_BoxTop.blend), while the bottom is in [WifiRadio2_BoxBottom.blend](WifiRadio2_BoxBottom.blend). To view or edit these files open them with the Blender 4.3 App in Windows 11.
+The top of the case is in [WifiRadio2_BoxTop.blend](Hardware/WifiRadio2_BoxTop.blend), while the bottom is in [WifiRadio2_BoxBottom.blend](Hardware/WifiRadio2_BoxBottom.blend). To view or edit these files open them with the Blender 4.3 App in Windows 11.
 
-To be able to 3D print the enclosure these files must be exported from the Blender App as [WifiRadio2_BoxTop.stl](WifiRadio2_BoxTop.stl) and [WifiRadio2_BoxBottom.stl](WifiRadio2_BoxBottom.stl) respectively.
+To be able to 3D print the enclosure these files must be exported from the Blender App as [WifiRadio2_BoxTop.stl](Hardware/WifiRadio2_BoxTop.stl) and [WifiRadio2_BoxBottom.stl](Hardware/WifiRadio2_BoxBottom.stl) respectively.
 
-Finally these *.stl files must be opened into the Crealty Print 6.0 Windows 11 App which creates the [WifiRadio2_BoxTop.3mf](WifiRadio2_BoxTop.3mf) and [WifiRadio2_BoxBottom.3mf](WifiRadio2_BoxBottom.3mfl) respectively. These contain the type of printer needed and other details of the print and are the basis for creating (by File => Export => Export Gcode...) the *.gcode files [WifiRadio2_BoxTop.gcode](WifiRadio2_BoxTop.gcode) and [WifiRadio2_BoxBottom.gcode](WifiRadio2_BoxBottom.gcode) respectively. These are the actual files used by the 3D Printer to do the actual printing! The files saved here are for the Crealty Ender-3 V3 SE printer with default setting for Hyper PLA.
+Finally these *.stl files must be opened into the Crealty Print 6.0 Windows 11 App which creates the [WifiRadio2_BoxTop.3mf](Hardware/WifiRadio2_BoxTop.3mf) and [WifiRadio2_BoxBottom.3mf](Hardware/WifiRadio2_BoxBottom.3mfl) respectively. These contain the type of printer needed and other details of the print and are the basis for creating (by File => Export => Export Gcode...) the *.gcode files [WifiRadio2_BoxTop.gcode](Hardware/WifiRadio2_BoxTop.gcode) and [WifiRadio2_BoxBottom.gcode](Hardware/WifiRadio2_BoxBottom.gcode) respectively. These are the actual files used by the 3D Printer to do the actual printing! The files saved here are for the Crealty Ender-3 V3 SE printer with default setting for Hyper PLA.
 
 If you have a different 3D printer you can still use the *.stl files but you will have to generate the *.gcode files yourself.
 
@@ -185,17 +185,17 @@ You will also need a soldering iron and solder, some two sided tape for attachin
 
 | Qty | Product | Description | AUD Cost | Comment | Designator |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [RPI4-MODBP-4GB](https://au.element14.com/raspberry-pi/rpi4-modbp-4gb/raspberry-pi-4-model-b-4gb/dp/3051887?CMP=KNC-MAU-GEN-SHOPPING) | SBC, [Raspberry Pi4 B 4GB](RPI4B.png), BCM2711, ARM Cortex-A72, 4GB RAM, MicroSD, Linux, Wifi, 2x micro HDMI | $92.65 | The brains of this project with this [datasheet](4170044.pdf)  | connected via J1 |
-| 1 | [XC4992](https://jaycar.com.au/p/XC4992) | 32GB Class 10 microSDHC [Card](Card.png) | $12.95 | For Raspberry Pi OS and storage | |
-| 1 | [PH-102475](https://raspberry.piaustralia.com.au/products/highpi-raspberry-pi-4-model-b-case) | HighPi Raspberry Pi 4 Model B [Case](Case.png) | $32.12 | could use other cases | |
-| 1 | [HP9544](https://jaycar.com.au/p/HP9544) | PC Boards Vero Type [Strip](Strip.png) - 95mm x 305mm | $15.50 | Contains the circuit | $4.00 cost used|
-| 3 | [ZD0150](https://jaycar.com.au/p/ZD0150) | Red 5mm [LED](LED.png) 8mcd Round Diffused | $1.20 | indicate status in binary | D0, D1, D2 |
-| 1 | [SP0720](https://jaycar.com.au/p/SP0720) | Red Snap Action Keyboard [Switch](Switch.png) - PCB Mount | $1.45 | The only input item | SW1 |
-| 1 | [RR0556](https://jaycar.com.au/p/RR0556) | 220 Ohm 0.5 Watt Metal Film [Resistors](Resistor.png) - Pack of 8 (only need 3) | $0.85 | Current limiting for LEDs | R0, R1, R2 - $0.32 cost used|
-| 1 | [HM3422](https://jaycar.com.au/p/HM3422) | 2 Pin 0.1in 90 Degree Locking [Header](Header2.png) - 2.54mm Pitch - Single | $0.30 | connector to RPi | part of J1 |
-| 1 | [HM3423](https://jaycar.com.au/p/HM3423) | 3 Pin 0.1in 90 Degree Locking [Header](Header3.png) - 2.54mm Pitch - Single | $0.40 | connector to RPi | part of J1 |
-| 1 | [WW4030](https://jaycar.com.au/p/WW4030) | Tinned Copper [Wire](Wire.png) - 100 gram Roll | $19.95 | for wiring up above Vero board | $0.80 cost used|
-| 1 | [WC6026](https://jaycar.com.au/p/WC6026) | 150mm Socket to Socket Jumper [Leads](Leads.png) - 40 Piece | $11.75 | 5 wires to connect Vero Board to Raspberry Pi | connects to J1 - $1.47 cost used|
-| 1 | [XC5191](https://jaycar.com.au/p/XC5191) | USB Powered PC [Speakers](Speakers.png) | $19.75 | Any if USB powered & 3.5mm input | |
-| 1 | [MP3449](https://jaycar.com.au/p/MP3449) | Mains USB Mini Power [Adaptor](Adaptor.png) - 2.4A | $26.95 | to Power Raspberry Pi | |
-| 1 | [WC7900](https://jaycar.com.au/p/WC7900) | USB Type-C to USB 2.0 A Male [Cable](Cable.png) 1.8m | $14.75 | to Power Raspberry Pi | |
+| 1 | [RPI4-MODBP-4GB](https://au.element14.com/raspberry-pi/rpi4-modbp-4gb/raspberry-pi-4-model-b-4gb/dp/3051887?CMP=KNC-MAU-GEN-SHOPPING) | SBC, [Raspberry Pi4 B 4GB](Images/RPI4B.png), BCM2711, ARM Cortex-A72, 4GB RAM, MicroSD, Linux, Wifi, 2x micro HDMI | $92.65 | The brains of this project with this [datasheet](Hardware/4170044.pdf)  | connected via J1 |
+| 1 | [XC4992](https://jaycar.com.au/p/XC4992) | 32GB Class 10 microSDHC [Card](Images/Card.png) | $12.95 | For Raspberry Pi OS and storage | |
+| 1 | [PH-102475](https://raspberry.piaustralia.com.au/products/highpi-raspberry-pi-4-model-b-case) | HighPi Raspberry Pi 4 Model B [Case](Images/Case.png) | $32.12 | could use other cases | |
+| 1 | [HP9544](https://jaycar.com.au/p/HP9544) | PC Boards Vero Type [Strip](Images/Strip.png) - 95mm x 305mm | $15.50 | Contains the circuit | $4.00 cost used|
+| 3 | [ZD0150](https://jaycar.com.au/p/ZD0150) | Red 5mm [LED](Images/LED.png) 8mcd Round Diffused | $1.20 | indicate status in binary | D0, D1, D2 |
+| 1 | [SP0720](https://jaycar.com.au/p/SP0720) | Red Snap Action Keyboard [Switch](Images/Switch.png) - PCB Mount | $1.45 | The only input item | SW1 |
+| 1 | [RR0556](https://jaycar.com.au/p/RR0556) | 220 Ohm 0.5 Watt Metal Film [Resistors](Images/Resistor.png) - Pack of 8 (only need 3) | $0.85 | Current limiting for LEDs | R0, R1, R2 - $0.32 cost used|
+| 1 | [HM3422](https://jaycar.com.au/p/HM3422) | 2 Pin 0.1in 90 Degree Locking [Header](Images/Header2.png) - 2.54mm Pitch - Single | $0.30 | connector to RPi | part of J1 |
+| 1 | [HM3423](https://jaycar.com.au/p/HM3423) | 3 Pin 0.1in 90 Degree Locking [Header](Images/Header3.png) - 2.54mm Pitch - Single | $0.40 | connector to RPi | part of J1 |
+| 1 | [WW4030](https://jaycar.com.au/p/WW4030) | Tinned Copper [Wire](Images/Wire.png) - 100 gram Roll | $19.95 | for wiring up above Vero board | $0.80 cost used|
+| 1 | [WC6026](https://jaycar.com.au/p/WC6026) | 150mm Socket to Socket Jumper [Leads](Images/Leads.png) - 40 Piece | $11.75 | 5 wires to connect Vero Board to Raspberry Pi | connects to J1 - $1.47 cost used|
+| 1 | [XC5191](https://jaycar.com.au/p/XC5191) | USB Powered PC [Speakers](Images/Speakers.png) | $19.75 | Any if USB powered & 3.5mm input | |
+| 1 | [MP3449](https://jaycar.com.au/p/MP3449) | Mains USB Mini Power [Adaptor](Images/Adaptor.png) - 2.4A | $26.95 | to Power Raspberry Pi | |
+| 1 | [WC7900](https://jaycar.com.au/p/WC7900) | USB Type-C to USB 2.0 A Male [Cable](Images/Cable.png) 1.8m | $14.75 | to Power Raspberry Pi | |
