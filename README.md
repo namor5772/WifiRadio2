@@ -53,7 +53,7 @@ Exec=/usr/bin/idle -r /home/roman/GitHub/WifiRadio2/Radio5.py
 
 This way of running the script via autostart in the GUI is because I tried to run it after boot in the Command Line Interface (CLI), however I could not make this work due to some privilage issues which made vlc unable to execute. This would have been more efficient and elegant but I just wanted to make it work.
 
-In the directory /home/{username}/GitHub/WifiRadio2/ which you need to create place the python script Radio5.py detailed below. You will also need to make the Wifi network automatically connect to an available access point, by discovering it and putting its password. if you move the location of this internet radio you will need to setup anothwer wifi connection by accesing the Raspbewrry Pi's GUI with an attached mouse, keyboard and screen. 
+In the directory /home/{username}/GitHub/WifiRadio2/ which you need to create place the python script Radio5.py detailed below. You will also need to make the Wifi network automatically connect to an available access point, by discovering it and inputting its password. if you move the location of this internet radio you will need to setup another wifi connection by accessing the Raspbewrry Pi's GUI with an attached mouse, keyboard and screen! 
 
 ## Software
 
@@ -180,8 +180,13 @@ Pricing and availability as of 26-Jan-2025
 
 | Qty | Product | Description | AUD Cost | Comment | Designator |
 | --- | --- | --- | --- | --- | --- |
-| 1 | [RPI4-MODBP-4GB](https://au.element14.com/raspberry-pi/rpi4-modbp-4gb/raspberry-pi-4-model-b-4gb/dp/3051887?CMP=KNC-MAU-GEN-SHOPPING) | SBC, Raspberry Pi4 B 4GB, BCM2711, ARM Cortex-A72, 4GB RAM, MicroSD, Linux, Wifi, 2x micro HDMI | $92.65 | The brains of this project, [datasheet](4170044.pdf)  | |
-| 1 | [POLOLU-3760](https://core-electronics.com.au/graphical-oled-display-128x64-1-3-white-spi.html) | Graphical OLED Display: 128x64, 1.3", White, SPI, 5V  | $22.20 | The display used in this project with [this driver chip](Extra/SH1106.pdf) | U1 |
+| 1 | [RPI4-MODBP-4GB](https://au.element14.com/raspberry-pi/rpi4-modbp-4gb/raspberry-pi-4-model-b-4gb/dp/3051887?CMP=KNC-MAU-GEN-SHOPPING) | SBC, [Raspberry](RPI4B.png) Pi4 B 4GB, BCM2711, ARM Cortex-A72, 4GB RAM, MicroSD, Linux, Wifi, 2x micro HDMI | $92.65 | The brains of this project with this [datasheet](4170044.pdf)  | connected via J1 |
+| 1 | [PH-102475](https://raspberry.piaustralia.com.au/products/highpi-raspberry-pi-4-model-b-case) | HighPi Raspberry Pi 4 Model B [Case](Case.png) | $32.12 | could use other cases | |
+| 1 | [HP9544](https://jaycar.com.au/p/HP9544) | PC Boards Vero Type [Strip](Strip.png) - 95mm x 305mm | $15.50 | Contains the circuit | |
+| 3 | [ZD0150](https://jaycar.com.au/p/ZD0150) | Red 5mm [LED](LED.png) 8mcd Round Diffused | $1.20 | indicate status in binary | D0, D1, D2 |
+| 1 | [SP0720](https://jaycar.com.au/p/SP0720) | Red Snap Action Keyboard [Switch](Switch.png) - PCB Mount | $1.45 | The only input item | SW1 |
+
+
 | 1 | [BARO (52)](https://www.freetronics.com.au/products/barometric-pressure-sensor-module) | I2C 5V Barometric Pressure Sensor Module | $19.00 | based on the [MS5673 chip](Extra/ENG_DS_MS5637-02BA03_B5.pdf) | U2 |
 | 1 | [ADA5580](https://core-electronics.com.au/adafruit-max17048-lipoly-liion-fuel-gauge-and-battery-monitor-stemma-jst-ph-qt-qwiic.html) | Adafruit I2C 5V MAX17048 LiPoly / LiIon Fuel Gauge and Battery Monitor - STEMMA JST PH & QT / Qwiic | $11.75 | based on the [MAX17048 chip](Extra/MAX17048-MAX17049.pdf) | U5 |
 | 1 | [ADA1904](https://core-electronics.com.au/adafruit-micro-lipo-w-microusb-jack-usb-liion-lipoly-charger-v1.html) | Adafruit Micro Lipo w/MicroUSB Jack - USB LiIon/LiPoly charger - v1 | $13.45 | based on the [MCP73831 chip](Extra/MCP73831.pdf) | U4 |
@@ -189,7 +194,7 @@ Pricing and availability as of 26-Jan-2025
 | 1 | [S4724](https://www.altronics.com.au/p/s4724-3.7v-1100mah-polymer-lithium-ion-battery-lipo/) | 3.7V 1100mAh Polymer Lithium Ion Battery (LiPo) | $21.95 | The LiPo battery that powers this project | Connects to U4 using JST-PH connector |
 | 1 | [HB6004](https://jaycar.com.au/p/HB6004) | Jiffy Case Imac Blue UB5 | $3.75 | Enclosure for project, 83mm x 54mm x 31mm |  |
 | 1 | [SS0812](https://jaycar.com.au/p/SS0812) | Sub-miniature DPDT Panel Mount Switch | $1.75 | on/off switch to power this altimeter | SW1 |
-| 1 | [HP9544](https://jaycar.com.au/p/HP9544) | PC Boards Vero Type Strip - 95mm x 305mm | $15.50 | Contains the circuit | |
+
 | 1 | [XC4464](https://jaycar.com.au/p/XC4464) | Duinotech Arduino Compatible USB to Serial Adaptor (uses FT232 chip) | $28.95 | used to program the Arduino Pro Mini (XC1) ||
 
 
