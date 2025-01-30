@@ -27,7 +27,7 @@ The interface circuit is placed in a custom 3D printed enclosure which is secure
 ![alt text](Images/image-1.png)
 ![alt text](Images/image-2.png)
 ![alt text](Images/image-3.png)
-The case was designed using Blender.
+The case for the interface circuit was designed using Blender.
 
 The top of the case is in [WifiRadio2_BoxTop.blend](Hardware/WifiRadio2_BoxTop.blend), while the bottom is in [WifiRadio2_BoxBottom.blend](Hardware/WifiRadio2_BoxBottom.blend). To view or edit these files open them with the Blender 4.3 App in Windows 11.
 
@@ -39,21 +39,40 @@ If you have a different 3D printer you can still use the *.stl files but you wil
 
 ## Raspberry Pi setup
 
-I have used a Raspberry Pi Model B Rev1.2 with 4Gb RAM, running Raspbian GNU/Linux 12 (bookworm) on a 32Gb SD card (which you will have to image).
-It is configured to Boot To Desktop with Auto login, with only the Remote GPIO enabled.
+I have used a Raspberry Pi 2 Model B V1.1 2014, running Raspberry Pi OS (Legacy) on a 8Gb Micro SD HCI card (which you will have to image). It is configured to Boot To Desktop with Auto login, with only the Remote GPIO enabled. Since it does not have inbuilt wifi you will need a wifi dongle. Also USB powered 3.5m stereo audio speakers need to be attached. All this powered with appropreate power adaptor and cable
+***COMPLETE***
 
-Install Python3 and idle3 as well as vlc, all of which reside in the directory /usr/bin/.
-In the directory /home/{username}/.config/autostart/ create a file autovlc.desktop with the contents:
+ 1. On your Windows 11 PC (and until further notice) format your SD Card
+ 2. Download the Raspberry Pi OS (Legacy) image file https://downloads.raspberrypi.com/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2024-10-28/2024-10-22-raspios-bullseye-armhf.img.xz from the official Raspberry Pi website https://www.raspberrypi.com/.
+ 3. Extract it to a newly created directory. In my case C:\Users\\{username}\OneDrive\RaspberryPi\2024-10-22-raspios-bullseye-armhf.img\ which contains the actual image file [2024-10-22-raspios-bullseye-armhf.img](Software/2024-10-22-raspios-bullseye-armhf.img)
+ 4. Install the Raspberry Pi Imager https://downloads.raspberrypi.org/imager/imager_latest.exe from the official Raspberry Pi website
+5. Run Imager for the above:
+    1. set hostname: rpi,  username: {username},  password: {password}
+    2. setup wifi with available SSID and known password
+6. Once completed image remove SD card from Windows 11 PC and put into your Raspberry Pi.
+7. Power up/reboot Raspberry Pi and assuming you are using a mouse, keyboard and HDMI monitor. In the Raspberry Pi Configuration:
+    1. In System tab: set Boot To desktop, Auto Login On.
+    2. In Interfaces: only set Remote GPIO to on.
+    3. Wireless LAN Country: AU Australia (or as appropriate)
+8. Now on the rebooted running Raspberry Pi which should have auto logged into a GUI and have Wifi available. In a terminal windows:
+    ```terminal
+    {username}@rpi:~ $ sudo apt update
+    {username}@rpi:~ $ sudo apt install python3 idle3
+    {username}@rpi:~ $ sudo apt install vlc
+    ```
+    This will install the Python, Idle and vlc (and cvlc) applications which will reside in /usr/bin/
+9. Create an autostart directory /home/{username}//.config/autostart and using nano create a file called autovlc.desktop in that directory, with the foillowing contents:    
+    ```terminal
+    [Desktop Entry]
+    Type=Application
+    Exec=/usr/bin/idle -r /home/{username}/Github/WifiRadio2/Radio5.py
+    ```
+10. Create a directory for the python script: /home/{username}/Github/WifiRadio2 and copy the python script Radio5.py into that directory (eg. using a USB memory stick with Radio5.py on it loaded from here).
 
-```terminal
-[Desktop Entry]
-Type=Application
-Exec=/usr/bin/idle -r /home/roman/GitHub/WifiRadio2/Radio5.py
-```
+    This way of running the script via autostart in the GUI is because I tried to run it after boot in the Command Line Interface (CLI), however I could not make this work due to some privilage issues which made vlc unable to execute. This would have been more efficient and elegant but I just wanted to make it work.
 
-This way of running the script via autostart in the GUI is because I tried to run it after boot in the Command Line Interface (CLI), however I could not make this work due to some privilage issues which made vlc unable to execute. This would have been more efficient and elegant but I just wanted to make it work.
-
-In the directory /home/{username}/GitHub/WifiRadio2/ which you need to create place the python script Radio5.py (detailed below). You will also need to make the Wifi network automatically connect to an available access point by discovering it and inputting its password. if you move the location of this internet radio you will need to setup another wifi connection by accessing the Raspbewrry Pi's GUI with an attached mouse, keyboard and screen! 
+11. Finally in the GUI set the volume to 100% using the slider. This will persist over reboots and enable volume to be controlled over the full range using just the speakers control.
+12. if you move the location of this internet radio you will need to setup another wifi connection. This involves identifying an SSID with a strong sigmal and inputting its password. This will the automatically connect to wifi on reboot if you are in range.
 
 ## Software
 
