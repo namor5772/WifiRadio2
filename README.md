@@ -39,7 +39,7 @@ If you have a different 3D printer you can still use the *.stl files but you wil
 
 ## Raspberry Pi setup
 
-I have used a Raspberry Pi 2 Model B V1.1 2014, running Raspberry Pi OS (Legacy) on a 8Gb Micro SD HCI card (which you will have to image). It is configured to Boot To Desktop with Auto login, with only the Remote GPIO enabled. Since it does not have inbuilt wifi you will need a wifi dongle. Also USB powered 3.5m stereo audio speakers need to be attached. All this powered with appropreate power adaptor and cable
+I have used a Raspberry Pi 2 Model B V1.1 2014, running Raspberry Pi OS (Legacy) on a 8Gb Micro SD HCI card (which you will have to image). It is configured to Boot To Desktop with Auto login, with only the Remote GPIO enabled. Since it does not have inbuilt wifi you will need a wifi dongle. Also USB powered 3.5m stereo audio speakers need to be attached. All this powered with an appropriate power adaptor and cable.
 ***COMPLETE***
 
  1. On your Windows 11 PC (and until further notice) format your SD Card
@@ -53,8 +53,8 @@ I have used a Raspberry Pi 2 Model B V1.1 2014, running Raspberry Pi OS (Legacy)
 7. Power up/reboot Raspberry Pi and assuming you are using a mouse, keyboard and HDMI monitor. In the Raspberry Pi Configuration:
     1. In System tab: set Boot To desktop, Auto Login On.
     2. In Interfaces: only set Remote GPIO to on.
-    3. Wireless LAN Country: AU Australia (or as appropriate)
-8. Now on the rebooted running Raspberry Pi which should have auto logged into a GUI and have Wifi available. In a terminal windows:
+    3. Wireless LAN Country: AU Australia (or as appropriate).
+8. Now on the rebooted running Raspberry Pi which should have auto logged into a GUI and have Wifi available. In a terminal windows run the following commands:
     ```terminal
     {username}@rpi:~ $ sudo apt update
     {username}@rpi:~ $ sudo apt install python3 idle3
