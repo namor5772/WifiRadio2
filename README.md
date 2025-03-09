@@ -61,7 +61,7 @@ I have used a Raspberry Pi 2 Model B V1.1 2014, running Raspberry Pi OS (Legacy)
     {username}@rpi:~ $ sudo apt install vlc
     ```
     This will install the Python, Idle and vlc (and cvlc) applications which will reside in /usr/bin/
-9. Create an autostart directory /home/{username}//.config/autostart and using nano create a file called autovlc.desktop in that directory, with the foillowing contents:    
+9. Create an autostart directory /home/{username}/.config/autostart and using nano create a file called autovlc.desktop in that directory, with the foillowing contents:    
     ```terminal
     [Desktop Entry]
     Type=Application
